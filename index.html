@@ -76,6 +76,17 @@ section{padding:88px 0}
 .reel .meta{padding:14px 16px 16px}
 .reel h3{font-size:18px;font-weight:800;margin-bottom:4px}
 .reel .meta p{font-size:13px;color:var(--mute)}
+.grid.wide{grid-template-columns:repeat(2,1fr)}
+.grid.wide .vid{aspect-ratio:16/9}
+.sub{font-family:"Bricolage Grotesque",Inter,sans-serif;font-size:24px;font-weight:800;margin:56px 0 20px}
+.play-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.demo{display:block;border-radius:var(--r);overflow:hidden;background:var(--card);border:1px solid var(--line);transition:transform .3s,border-color .3s}
+.demo:hover{transform:translateY(-6px);border-color:rgba(224,122,79,.5)}
+.demo .frame{position:relative;aspect-ratio:4/3;overflow:hidden;background:#000}
+.demo iframe{position:absolute;top:0;left:0;width:200%;height:200%;transform:scale(.5);transform-origin:0 0;border:0;pointer-events:none}
+.demo .meta{padding:14px 16px 16px}
+.demo h3{font-size:18px;font-weight:800;margin-bottom:4px}
+.demo p{font-size:13px;color:var(--mute)}
 .chip{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--accent2);margin-bottom:6px}
 
 /* process */
@@ -109,7 +120,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:50;background:rgba(8,7,6,.92);display:none;align-items:center;justify-content:center;padding:24px}
 .lb.open{display:flex}
-.lb video{max-height:88vh;max-width:100%;aspect-ratio:9/16;border-radius:16px;background:#000}
+.lb video{max-height:88vh;max-width:100%;border-radius:16px;background:#000}
 .lb button{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg2);color:var(--ink);font-size:22px;cursor:pointer}
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
@@ -117,6 +128,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 @media (max-width:960px){
   .grid{grid-template-columns:repeat(2,1fr)}
+  .play-grid{grid-template-columns:repeat(2,1fr)}
   .steps{grid-template-columns:repeat(2,1fr)}
   .agents{grid-template-columns:repeat(2,1fr)}
   .hero .wrap{grid-template-columns:1fr}
@@ -133,7 +145,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .reel .meta{padding:10px 12px 12px}
   .reel h3{font-size:15px}
   .reel .meta p{display:none}
-  .steps,.agents{grid-template-columns:1fr}
+  .steps,.agents,.grid.wide,.play-grid{grid-template-columns:1fr}
+  .grid.wide .reel .meta p{display:block}
   .contact{padding:44px 24px;border-radius:24px}
   .stats{gap:24px}
 }
@@ -165,7 +178,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <a class="btn btn-ghost" href="https://instagram.com/jako.frames" target="_blank" rel="noopener">DM for a project →</a>
       </div>
       <div class="stats">
-        <div><b>7</b><small>reels shipped</small></div>
+        <div><b>15</b><small>videos shipped</small></div>
         <div><b>1K+</b><small>followers</small></div>
         <div><b>5</b><small>AI agents on the team</small></div>
       </div>
@@ -183,7 +196,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <h2>Selected work</h2>
       <p>Hover to preview, click to watch with sound. Every frame here was rendered from code.</p>
     </div>
+    <h3 class="sub reveal">Reels</h3>
     <div class="grid" id="grid"></div>
+    <h3 class="sub reveal">Commercials &amp; UI motion</h3>
+    <div class="grid wide" id="gridWide"></div>
+    <h3 class="sub reveal">Interactive — live in the browser</h3>
+    <div class="play-grid">
+      <a class="demo reveal" href="play/jako-hq.html" target="_blank" rel="noopener"><div class="frame"><iframe src="play/jako-hq.html" loading="lazy" tabindex="-1" title="Jako HQ"></iframe></div><div class="meta"><span class="chip">Three.js · 3D</span><h3>Jako HQ</h3><p>The AI team's 3D office — drag to look around.</p></div></a>
+      <a class="demo reveal" href="play/kinetic-type.html" target="_blank" rel="noopener"><div class="frame"><iframe src="play/kinetic-type.html" loading="lazy" tabindex="-1" title="Kinetic type"></iframe></div><div class="meta"><span class="chip">HTML · CSS</span><h3>Kinetic type</h3><p>Typography that moves to the beat.</p></div></a>
+      <a class="demo reveal" href="play/logo-reveal.html" target="_blank" rel="noopener"><div class="frame"><iframe src="play/logo-reveal.html" loading="lazy" tabindex="-1" title="Logo reveal"></iframe></div><div class="meta"><span class="chip">HTML · CSS</span><h3>Logo reveal</h3><p>A logo animation built in pure code.</p></div></a>
+    </div>
   </div>
 </section>
 
@@ -257,8 +279,16 @@ const reels = [
   {id:'find-skills', title:'Find skills', tag:'Remotion', text:'How to find Claude skills, explained by Jako.'},
   {id:'what-the-heck', title:'What the heck', tag:'Remotion', text:'Reaction cut with word-by-word subtitles.'},
   {id:'grand-point', title:'Grand Point', tag:'Client · Remotion', text:'Fast-cut promo with motion titles.'},
+  {id:'duolingo-bts', title:'Duolingo Ep1 — BTS', tag:'Behind the scenes', text:'How the Duolingo episode was built with Claude.'},
+  {id:'fitcore', title:'FITCORE', tag:'After Effects', text:'Fitness app reel with 3D camera moves and glow.'},
+  {id:'duolingo', title:'Duolingo Ep1', tag:'Animation', text:'A Duolingo-style story episode.', wide:true},
+  {id:'geonline', title:'GeOnline promo', tag:'App promo', text:'Snow-leopard mascot launch film for a learning app.', wide:true},
+  {id:'pinterest', title:'Pinterest motion', tag:'UI motion', text:'A soft, floating Pinterest board in motion.', wide:true},
+  {id:'chatgpt', title:'ChatGPT commercial', tag:'Spec ad', text:'Minimal spec ad — the AI thinking out loud.', wide:true},
+  {id:'pixel-room', title:'Pixel room', tag:'3D · Voxel', text:'A cozy voxel room loop.', wide:true},
+  {id:'toggle', title:'Dark mode toggle', tag:'Micro-interaction', text:'A tiny settings switch, done right.', wide:true},
 ];
-const grid = document.getElementById('grid');
+const grid = document.getElementById('grid'), gridWide = document.getElementById('gridWide');
 const playIcon = '<svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>';
 reels.forEach(r => {
   const el = document.createElement('article');
@@ -274,7 +304,7 @@ reels.forEach(r => {
     el.addEventListener('mouseleave', () => { v.pause(); el.classList.remove('playing'); });
   }
   el.addEventListener('click', () => openLb(r.id));
-  grid.appendChild(el);
+  (r.wide ? gridWide : grid).appendChild(el);
 });
 
 const lb = document.getElementById('lb'), lbv = document.getElementById('lbVideo');
